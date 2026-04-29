@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "170260499004",
+    "project_id": "backhome-b7a3e",
+    "storage_bucket": "backhome-b7a3e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170260499004:android:6e592869d9aea11b6c9139",
+        "android_client_info": {
+          "package_name": "com.example.backhome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2oZEu-W5NMwzhBBPFmtj9pLIl1q5HdNQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

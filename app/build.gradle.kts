@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     id("com.google.dagger.hilt.android")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -57,6 +58,7 @@ dependencies {
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.56.2")
+    implementation(libs.firebase.auth)
     ksp("com.google.dagger:hilt-compiler:2.56.2")
 
     // Hilt Navigation Compose
