@@ -59,6 +59,7 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:2.56.2")
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
     ksp("com.google.dagger:hilt-compiler:2.56.2")
 
     // Hilt Navigation Compose

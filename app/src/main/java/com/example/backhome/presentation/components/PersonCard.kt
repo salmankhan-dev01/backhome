@@ -27,6 +27,11 @@ fun PersonCard(
     description: String,
     place: String,
     address: String,
+    district: String,
+    state: String,
+    contact:String,
+    type:String,
+
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -47,7 +52,7 @@ fun PersonCard(
                 contentDescription = "Person Image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(380.dp),
+                    .height(350.dp),
                 contentScale = ContentScale.Crop
             )
 
@@ -78,37 +83,52 @@ fun PersonCard(
                     color = Color.DarkGray
                 )
 
-                Text(
-                    text = description,
-                    fontSize = 14.sp,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
 
                 Text(
                     text = "Place: ${if (place.isNotBlank()) place else "Unknown"}",
                     fontSize = 13.sp,
                     color = Color.Gray
                 )
+                Text(
+                    text = "District: ${district}",
+                    fontSize = 13.sp,
+                    color = Color.Gray,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
 
                 Text(
-                    text = "State: ${if (address.isNotBlank()) address else "Unknown"}",
+                    text = "State: ${state}",
+                    fontSize = 13.sp,
+                    color = Color.Gray,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+
+                Text(
+                    text = "Type: ${type}",
                     fontSize = 13.sp,
                     color = Color.Gray,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "District: ${if (address.isNotBlank()) address else "Unknown"}",
+                    text = "Your Contact: ${contact}",
                     fontSize = 13.sp,
                     color = Color.Gray,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Contact: ${if (address.isNotBlank()) address else "Unknown"}",
+                    text = "Your Address: ${address}",
                     fontSize = 13.sp,
                     color = Color.Gray,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text ="Description: ${description}",
+                    fontSize = 14.sp,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
@@ -116,3 +136,16 @@ fun PersonCard(
         }
     }
 }
+
+
+
+//PersonCard(
+//imageUrl ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsuoQ7vB5ArqFQUtjamvtRnM5bD9mHegSmJg&s",
+//name = "Yalina",
+//age = "45",
+//fatherName ="unknown",
+//description = "Nothing",
+//place ="Lucknow",
+//address = "skdjf",
+//modifier = Modifier
+//)
