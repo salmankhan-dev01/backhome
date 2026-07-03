@@ -137,6 +137,8 @@ fun ProfileScreen(navController: NavController) {
                 title = "My Registered Persons",
                 onClick = {
                     // Navigate to My Registered Persons Screen
+
+                    navController.navigate(Route.MyRegisterPerson.route)
                 }
             )
 

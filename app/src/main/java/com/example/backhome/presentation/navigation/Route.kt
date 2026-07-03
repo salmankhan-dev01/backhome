@@ -8,4 +8,6 @@ sealed class Route(val route: String) {
     object ProfileScreen : Route("profile")
     object PersonForm : Route("form")
 
+    object MyRegisterPerson: Route("myregister")
+
 }

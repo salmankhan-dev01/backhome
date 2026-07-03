@@ -11,12 +11,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -32,6 +40,17 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.backhome.util.Result
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+
+@OptIn(ExperimentalMaterial3Api::class)
 
 @Composable
 fun PersonForm(
@@ -95,162 +114,228 @@ fun PersonForm(
         }
     }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
+    Scaffold(
 
-        Text(
-            text = "Person Details",
-            style = MaterialTheme.typography.headlineSmall
-        )
+        topBar = {
 
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Name") },
-            modifier = Modifier.fillMaxWidth()
-        )
+            TopAppBar(
 
-        OutlinedTextField(
-            value = age,
-            onValueChange = { age = it },
-            label = { Text("Age") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
+                title = {
+                    Text("Register Person")
+                },
 
-        OutlinedTextField(
-            value = fatherName,
-            onValueChange = { fatherName = it },
-            label = { Text("Father Name") },
-            modifier = Modifier.fillMaxWidth()
-        )
+                navigationIcon = {
 
-        OutlinedTextField(
-            value = place,
-            onValueChange = { place = it },
-            label = { Text("Place") },
-            modifier = Modifier.fillMaxWidth()
-        )
+                    IconButton(
+                        onClick = {
+                            navController.popBackStack()
+                        }
+                    ) {
 
-        OutlinedTextField(
-            value = district,
-            onValueChange = { district = it },
-            label = { Text("District") },
-            modifier = Modifier.fillMaxWidth()
-        )
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back"
+                        )
 
-        OutlinedTextField(
-            value = state,
-            onValueChange = { state = it },
-            label = { Text("State") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        OutlinedTextField(
-            value = myAddress,
-            onValueChange = { myAddress = it },
-            label = { Text("Your Address") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Text(
-            text = "Person Type",
-            style = MaterialTheme.typography.titleMedium
-        )
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(24.dp)
-        ) {
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                RadioButton(
-                    selected = personType == "Missing",
-                    onClick = {
-                        personType = "Missing"
                     }
-                )
 
-                Text("Missing")
-            }
+                }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            )
 
-                RadioButton(
-                    selected = personType == "Found",
-                    onClick = {
-                        personType = "Found"
-                    }
-                )
-
-                Text("Found")
-            }
         }
 
-        OutlinedTextField(
-            value = myPhoneNumber,
-            onValueChange = { myPhoneNumber = it },
-            label = { Text("Your Phone Number") },
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Phone
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
+    ) { padding ->
 
-        OutlinedTextField(
-            value = description,
-            onValueChange = { description = it },
-            label = { Text("Description") },
-            minLines = 4,
-            maxLines = 6,
-            modifier = Modifier.fillMaxWidth()
-        )
+        Column(
 
-        Button(
-            onClick = {
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
 
-                viewModel.inputform(
-                    name = name,
-                    age = age,
-                    fatherName = fatherName,
-                    place = place,
-                    district = district,
-                    state = state,
-                    youraddress = myAddress,
-                    yourphonenumber = myPhoneNumber,
-                    description = description,
-                    type = personType
-                )
+            verticalArrangement = Arrangement.spacedBy(14.dp)
 
-            },
-            modifier = Modifier.fillMaxWidth(),
-            enabled = formState !is Result.Loading
         ) {
 
-            if (formState is Result.Loading) {
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                elevation = CardDefaults.cardElevation(4.dp)
+            ) {
 
-                CircularProgressIndicator(
-                    modifier = Modifier.size(20.dp),
-                    strokeWidth = 2.dp
-                )
+                Column(
+                    modifier = Modifier.padding(16.dp)
+                ) {
 
-            } else {
+                    OutlinedTextField(
+                        value = name,
+                        onValueChange = { name = it },
+                        label = { Text("Name") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
 
-                Text("Submit")
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = age,
+                        onValueChange = { age = it },
+                        label = { Text("Age") },
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Number
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = fatherName,
+                        onValueChange = { fatherName = it },
+                        label = { Text("Father Name") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = place,
+                        onValueChange = { place = it },
+                        label = { Text("Place") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = district,
+                        onValueChange = { district = it },
+                        label = { Text("District") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = state,
+                        onValueChange = { state = it },
+                        label = { Text("State") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = myAddress,
+                        onValueChange = { myAddress = it },
+                        label = { Text("Your Address") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(
+                        text = "Person Type",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+
+                            RadioButton(
+                                selected = personType == "Missing",
+                                onClick = {
+                                    personType = "Missing"
+                                }
+                            )
+
+                            Text("Missing")
+                        }
+
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+
+                            RadioButton(
+                                selected = personType == "Found",
+                                onClick = {
+                                    personType = "Found"
+                                }
+                            )
+
+                            Text("Found")
+                        }
+
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = myPhoneNumber,
+                        onValueChange = { myPhoneNumber = it },
+                        label = { Text("Your Phone Number") },
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.Phone
+                        ),
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    OutlinedTextField(
+                        value = description,
+                        onValueChange = { description = it },
+                        label = { Text("Description") },
+                        minLines = 4,
+                        maxLines = 6,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Button(
+                        onClick = {
+
+                            viewModel.inputform(
+                                name = name,
+                                age = age,
+                                fatherName = fatherName,
+                                place = place,
+                                district = district,
+                                state = state,
+                                youraddress = myAddress,
+                                yourphonenumber = myPhoneNumber,
+                                description = description,
+                                type = personType
+                            )
+
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        enabled = formState !is Result.Loading
+                    ) {
+
+                        if (formState is Result.Loading) {
+
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(20.dp),
+                                strokeWidth = 2.dp
+                            )
+
+                        } else {
+
+                            Text("Submit")
+
+                        }
+
+                    }
+
+                }
 
             }
+
         }
+
     }
 }

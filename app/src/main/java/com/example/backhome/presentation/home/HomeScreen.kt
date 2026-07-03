@@ -1,4 +1,4 @@
-package com.example.backhome.presentation.missing
+package com.example.backhome.presentation.home
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement

@@ -1,9 +1,11 @@
 package com.example.backhome.di
 
 import com.example.backhome.data.repository.AuthRepositoryImpl
+import com.example.backhome.data.repository.GetMyPersonRepositoryImpl
 import com.example.backhome.data.repository.GetPersonRepositoryImpl
 import com.example.backhome.data.repository.InputFromRepositoryImpl
 import com.example.backhome.domain.repository.AuthRepository
+import com.example.backhome.domain.repository.GetMyPersonRepository
 import com.example.backhome.domain.repository.GetPersonRepository
 import com.example.backhome.domain.repository.InputFromRepository
 import dagger.Binds
@@ -29,4 +31,9 @@ abstract class RepositoryModule {
     abstract fun bindGetPersonRepository(
         impl: GetPersonRepositoryImpl
     ): GetPersonRepository
+
+    @Binds
+    abstract fun bindGetMyPersonRepository(
+        impl: GetMyPersonRepositoryImpl
+    ): GetMyPersonRepository
 }
