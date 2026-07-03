@@ -4,6 +4,8 @@ import android.util.Log
 import com.example.backhome.domain.model.Person
 import com.example.backhome.domain.repository.GetMyPersonRepository
 import com.example.backhome.util.Result
+import com.example.backhome.util.Result.Failure
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -16,8 +18,13 @@ class GetMyPersonRepositoryImpl @Inject constructor(
 
         return try {
 
+            val uid = FirebaseAuth.getInstance().currentUser?.uid
+                ?: return Failure("User not logged in")
+
             val snapshot = firestore
-                .collectionGroup("persons")
+                .collection("users")
+                .document(uid)
+                .collection("persons")
                 .get()
                 .await()
 
@@ -45,6 +52,6 @@ class GetMyPersonRepositoryImpl @Inject constructor(
 
             Log.e("Firestore", "Error", e)
 
-            Result.Failure(e.message ?: "Failed")
+            Failure(e.message ?: "Failed")
         }
     }}

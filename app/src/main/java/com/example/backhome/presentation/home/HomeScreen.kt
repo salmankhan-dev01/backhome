@@ -44,6 +44,10 @@ fun HomeScreen(
 
     val personState by viewModel.getPersonState.collectAsState()
 
+    LaunchedEffect(Unit) {
+        viewModel.getPersons()
+    }
+
     var search by remember {
         mutableStateOf("")
     }

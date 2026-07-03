@@ -14,12 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.backhome.presentation.navigation.Route
 import com.example.backhome.util.Result
+
 
 @Composable
 fun LoginScreen(
@@ -34,6 +36,7 @@ fun LoginScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordError by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
 
     LaunchedEffect(state) {
         if (state is Result.Success) {
@@ -114,7 +117,35 @@ fun LoginScreen(
                 label = {
                     Text("Password")
                 },
-                visualTransformation = PasswordVisualTransformation(),
+                visualTransformation =
+                    if (passwordVisible)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
+//                trailingIcon = {
+//
+//                    val image =
+//                        if (passwordVisible)
+//                            Icons.Default.Visibility
+//                        else
+//                            Icons.Default.VisibilityOff
+//
+//                    IconButton(
+//                        onClick = {
+//                            passwordVisible = !passwordVisible
+//                        }
+//                    ) {
+//                        Icon(
+//                            imageVector = image,
+//                            contentDescription =
+//                                if (passwordVisible)
+//                                    "Hide Password"
+//                                else
+//                                    "Show Password"
+//                        )
+//                    }
+//                }
+                ,
                 modifier = Modifier.fillMaxWidth(),
                 isError = passwordError.isNotEmpty(),
                 singleLine = true,

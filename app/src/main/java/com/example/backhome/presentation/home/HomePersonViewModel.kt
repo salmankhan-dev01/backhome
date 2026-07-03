@@ -20,10 +20,6 @@ class HomePersonViewModel @Inject constructor(
     private val _getPersonState = MutableStateFlow<Result<List<Person>>>(Result.Idle)
     val getPersonState: StateFlow<Result<List<Person>>> = _getPersonState.asStateFlow()
 
-    init {
-        getPersons()
-    }
-
     fun getPersons() {
 
         viewModelScope.launch {
