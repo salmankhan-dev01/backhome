@@ -5,6 +5,7 @@ import com.example.backhome.data.repository.GetMyPersonRepositoryImpl
 import com.example.backhome.data.repository.GetPersonRepositoryImpl
 import com.example.backhome.data.repository.InputFromRepositoryImpl
 import com.example.backhome.domain.repository.AuthRepository
+import com.example.backhome.domain.repository.DeleteMyPersonRepository
 import com.example.backhome.domain.repository.GetMyPersonRepository
 import com.example.backhome.domain.repository.GetPersonRepository
 import com.example.backhome.domain.repository.InputFromRepository
@@ -12,6 +13,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import com.example.backhome.data.repository.DeleteMyPersonRepoImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -36,4 +38,9 @@ abstract class RepositoryModule {
     abstract fun bindGetMyPersonRepository(
         impl: GetMyPersonRepositoryImpl
     ): GetMyPersonRepository
+
+    @Binds
+    abstract fun bindDeleteMyPersonRepository(
+        impl: DeleteMyPersonRepoImpl
+    ): DeleteMyPersonRepository
 }

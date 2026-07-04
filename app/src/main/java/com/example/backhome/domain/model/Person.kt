@@ -1,6 +1,7 @@
 package com.example.backhome.domain.model
 
 data class Person(
+    val id: String="",
     val name: String = "",
     val age: String = "",
     val fatherName: String = "",

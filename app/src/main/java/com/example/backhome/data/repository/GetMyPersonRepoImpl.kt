@@ -33,6 +33,7 @@ class GetMyPersonRepositoryImpl @Inject constructor(
             val personList = snapshot.documents.map { document ->
 
                 Person(
+                    id=document.id,
                     name = document.getString("name") ?: "",
                     age = document.getString("age") ?: "",
                     fatherName = document.getString("fatherName") ?: "",

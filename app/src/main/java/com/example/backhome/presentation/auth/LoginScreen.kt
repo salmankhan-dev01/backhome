@@ -6,6 +6,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
@@ -92,6 +95,12 @@ fun LoginScreen(
                 label = {
                     Text("Email")
                 },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email,
+                        contentDescription = "Email"
+                    )
+                },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large
@@ -122,29 +131,29 @@ fun LoginScreen(
                         VisualTransformation.None
                     else
                         PasswordVisualTransformation(),
-//                trailingIcon = {
-//
-//                    val image =
-//                        if (passwordVisible)
-//                            Icons.Default.Visibility
-//                        else
-//                            Icons.Default.VisibilityOff
-//
-//                    IconButton(
-//                        onClick = {
-//                            passwordVisible = !passwordVisible
-//                        }
-//                    ) {
-//                        Icon(
-//                            imageVector = image,
-//                            contentDescription =
-//                                if (passwordVisible)
-//                                    "Hide Password"
-//                                else
-//                                    "Show Password"
-//                        )
-//                    }
-//                }
+                trailingIcon = {
+
+                    val image =
+                        if (passwordVisible)
+                            Icons.Default.Visibility
+                        else
+                            Icons.Default.VisibilityOff
+
+                    IconButton(
+                        onClick = {
+                            passwordVisible = !passwordVisible
+                        }
+                    ) {
+                        Icon(
+                            imageVector = image,
+                            contentDescription =
+                                if (passwordVisible)
+                                    "Hide Password"
+                                else
+                                    "Show Password"
+                        )
+                    }
+                }
                 ,
                 modifier = Modifier.fillMaxWidth(),
                 isError = passwordError.isNotEmpty(),

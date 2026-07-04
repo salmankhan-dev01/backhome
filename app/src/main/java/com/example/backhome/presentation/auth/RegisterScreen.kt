@@ -5,6 +5,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.getValue
@@ -12,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -30,6 +34,9 @@ fun RegisterScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var passwordVisible by remember { mutableStateOf(false) }
+    var confirmPasswordVisible by remember { mutableStateOf(false) }
+
 
     var passwordError by remember { mutableStateOf("") }
     var confirmPasswordError by remember { mutableStateOf("") }
@@ -90,6 +97,12 @@ fun RegisterScreen(
                 label = {
                     Text("Email")
                 },
+                trailingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Email,
+                        contentDescription = "Email"
+                    )
+                },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = MaterialTheme.shapes.large
@@ -125,7 +138,34 @@ fun RegisterScreen(
                 label = {
                     Text("Password")
                 },
-                visualTransformation = PasswordVisualTransformation(),
+                visualTransformation =
+                    if (passwordVisible)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
+                trailingIcon = {
+
+                    val image =
+                        if (passwordVisible)
+                            Icons.Default.Visibility
+                        else
+                            Icons.Default.VisibilityOff
+
+                    IconButton(
+                        onClick = {
+                            passwordVisible = !passwordVisible
+                        }
+                    ) {
+                        Icon(
+                            imageVector = image,
+                            contentDescription =
+                                if (passwordVisible)
+                                    "Hide Password"
+                                else
+                                    "Show Password"
+                        )
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 isError = passwordError.isNotEmpty(),
                 singleLine = true,
@@ -166,7 +206,34 @@ fun RegisterScreen(
                 label = {
                     Text("Confirm Password")
                 },
-                visualTransformation = PasswordVisualTransformation(),
+                visualTransformation =
+                    if (confirmPasswordVisible)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
+                trailingIcon = {
+
+                    val image =
+                        if (confirmPasswordVisible)
+                            Icons.Default.Visibility
+                        else
+                            Icons.Default.VisibilityOff
+
+                    IconButton(
+                        onClick = {
+                            confirmPasswordVisible = !confirmPasswordVisible
+                        }
+                    ) {
+                        Icon(
+                            imageVector = image,
+                            contentDescription =
+                                if (confirmPasswordVisible)
+                                    "Hide Password"
+                                else
+                                    "Show Password"
+                        )
+                    }
+                },
                 modifier = Modifier.fillMaxWidth(),
                 isError = confirmPasswordError.isNotEmpty(),
                 singleLine = true,
