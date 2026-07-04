@@ -81,7 +81,7 @@ The primary goal of BackHome is to provide a simple, reliable, and community-dri
 <tr>
 <td align="center">
 <b>Missing / Found Registration Form</b><br><br>
-<img src="screenshots/from.jpeg" width="220">
+<img src="screenshots/form.jpeg" width="220">
 </td>
 
 <td align="center">
